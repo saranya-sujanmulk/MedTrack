@@ -1,0 +1,109 @@
+                                                                                                                             
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MedTrack</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background-color: #e0f7fa;
+      color: #333;
+       background: url('/static/background-image.png') no-repeat center center/cover;
+    }
+    .header {
+      
+      color: rgb(29, 104, 225);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    .header .logo {
+      font-size: 26px;
+      font-weight: bold;
+    }
+    .header .nav a {
+      color: rgb(255, 255, 255);
+      text-decoration: none;
+      margin-left: 25px;
+      font-weight: 600;
+      transition: opacity 0.3s;
+    }
+    .header .nav a:hover {
+      opacity: 0.85;
+    }
+    .main {
+      width: 100%;
+      background: linear-gradient(to top rgba(0,0,0,0.5)50%) url(background-image.png);
+      background-position: center;
+      background-size: cover;
+      height: 109vh;
+      text-align: center;
+      padding: 80px 20px 60px;
+    }
+
+    .main h1 {
+      font-size: 38px;
+      margin-bottom: 15px;
+      color: #ffffff;
+    }
+    .main p {
+      font-size: 18px;
+      max-width: 600px;
+      margin: 0 auto;
+      color: #f7f4f4;
+    }
+    .about {
+      text-align: center;
+      padding: 50px 20px;
+      background-color: #f4f9fb;
+    }
+    .about h2 {
+      font-size: 30px;
+      margin-bottom: 20px;
+      color: #1a6fa4;
+    }
+    .about p {
+      font-size: 16px;
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    footer {
+      background-color: rgba(252, 244, 244, 0.989);
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      color: #000000;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">MED TRACK</div>
+    <div class="nav">
+<a href="{{ url_for('login') }}">Login</a>
+
+<a href="{{ url_for('signup') }}">Signup</a>
+<a href="{{ url_for('about') }}">About</a>
+<a href="{{ url_for('contact') }}">Contact</a>
+
+</div> 
+
+    </div>
+  </div>
+
+  <div class="main">
+    <h1>MedTrack - When Urgency Meets Innovation</h1>
+    <p> Healthcare beyond hospital walls __ Our MedTrack connects you, supports you, wherever you are.</p>
+ 
+  </div>
+<footer>
+    &copy; 2025 MedTrack. All rights reserved.
+  </footer>
+</body>
+</html>

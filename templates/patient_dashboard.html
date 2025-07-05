@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Patient Dashboard</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background-color: #f5f7fa;
+    }
+
+    .header {
+      background-color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .header h1 {
+      color: #2a5d8f;
+      font-size: 24px;
+    }
+
+    .welcome {
+      background-color: #ffffff;
+      padding: 0.75rem 2rem;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .dashboard {
+      padding: 2rem;
+    }
+
+    .tab-label {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border-radius: 5px 5px 0 0;
+      background-color: #f0f0f0;
+      cursor: pointer;
+      font-weight: bold;
+      color: #2a5d8f;
+      margin-right: 8px;
+    }
+
+    input[type="radio"] {
+      display: none;
+    }
+
+    input[type="radio"]:checked + .tab-label {
+      background-color: #2a5d8f;
+      color: white;
+    }
+
+    .tab-content {
+      display: none;
+      background-color: white;
+      padding: 1.5rem;
+      border-radius: 0 0 8px 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      margin-top: -1px;
+    }
+
+    #tab1:checked ~ .content #content1,
+    #tab2:checked ~ .content #content2,
+    #tab3:checked ~ .content #content3,
+    #tab5:checked ~ .content #content5 {
+      display: block;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    table th, table td {
+      padding: 12px;
+      border-bottom: 1px solid #eee;
+      text-align: left;
+    }
+
+    table th {
+      background-color: #f0f4f8;
+      color: #2a5d8f;
+    }
+
+    .status {
+      font-weight: bold;
+    }
+
+    .status.Pending {
+      color: #e69500;
+    }
+
+    .status.Completed {
+      color: #28a745;
+    }
+
+    .status.Cancelled {
+      color: #dc3545;
+    }
+
+    form label {
+      display: block;
+      margin-top: 1rem;
+      font-weight: 500;
+    }
+
+    form input, form select, form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    form button {
+      margin-top: 1.5rem;
+      background-color: #2a5d8f;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .nav-links {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+    }
+
+    .nav-links a {
+      margin-left: 1rem;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .nav-links a:first-child {
+      color: #007BFF;
+    }
+
+    .nav-links a:last-child {
+      color: #FF0000;
+    }
+
+    ul.doctor-list {
+      margin-top: 1rem;
+      padding-left: 1rem;
+    }
+
+    ul.doctor-list li {
+      margin-bottom: 0.5rem;
+      font-size: 16px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>MedTrack</h1>
+    <div class="nav-links">
+      <a href="{{ url_for('first') }}">Home</a>
+      <a href="{{ url_for('logout') }}">Logout</a>
+    </div>
+  </div>
+
+  <div class="welcome">Welcome {{ user.name }}!</div>
+
+  <div class="dashboard">
+    <h2 style="color: #2a5d8f;">Patient Dashboard</h2>
+
+    <!-- Tabs -->
+    <input type="radio" id="tab1" name="tabs" {% if tab == 'tab1' %}checked{% endif %}>
+    <label for="tab1" class="tab-label">Appointments</label>
+
+    <input type="radio" id="tab2" name="tabs" {% if tab == 'tab2' %}checked{% endif %}>
+    <label for="tab2" class="tab-label">Book Appointment</label>
+
+    <input type="radio" id="tab3" name="tabs" {% if tab == 'tab3' %}checked{% endif %}>
+    <label for="tab3" class="tab-label">Prescriptions</label>
+
+    <input type="radio" id="tab5" name="tabs" {% if tab == 'tab5' %}checked{% endif %}>
+    <label for="tab5" class="tab-label">All Doctors</label>
+
+    <!-- Content -->
+    <div class="content">
+
+      <!-- Appointments -->
+      <div id="content1" class="tab-content">
+        <h3 style="color: #2a5d8f;">Your Appointments</h3>
+        {% if success_message %}
+          <p style="color: green; font-weight: bold;">{{ success_message }}</p>
+        {% endif %}
+        {% if appointments %}
+          <table>
+            <thead>
+              <tr>
+                <th>Doctor</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Reason</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for appt in appointments %}
+              <tr>
+                <td>{{ appt.doctor_name }}</td>
+                <td>{{ appt.date }}</td>
+                <td>{{ appt.time }}</td>
+                <td>{{ appt.reason }}</td>
+                <td class="status {{ appt.status }}">{{ appt.status }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        {% else %}
+          <p>No appointments booked yet.</p>
+        {% endif %}
+      </div>
+
+      <!-- Book Appointment -->
+      <div id="content2" class="tab-content">
+        <h3 style="color: #2a5d8f;">Book New Appointment</h3>
+        <form method="POST" action="{{ url_for('book_appointment') }}">
+          <label for="doctor">Select Doctor:</label>
+          <select id="doctor" name="doctor" required>
+            <option value="">-- Select a Doctor --</option>
+            {% for doctor in doctors %}
+              <option value="{{ doctor }}">{{ doctor }}</option>
+            {% endfor %}
+          </select>
+
+          <label for="date">Date:</label>
+          <input type="date" id="date" name="date" required>
+
+          <label for="time">Time:</label>
+          <input type="time" id="time" name="time" required>
+
+          <label for="reason">Reason or Symptoms:</label>
+          <textarea id="reason" name="reason" rows="4" placeholder="e.g. Fever, check-up, consultation..." required></textarea>
+
+          <button type="submit">Book Appointment</button>
+        </form>
+      </div>
+
+      <!-- Prescriptions -->
+      <div id="content3" class="tab-content">
+        <h3 style="color: #2a5d8f;">Your Prescriptions</h3>
+        {% if prescriptions %}
+          <table>
+            <thead>
+              <tr>
+                <th>Diagnosis</th>
+                <th>Medications</th>
+                <th>Date</th>
+                <th>Doctor</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for pres in prescriptions %}
+              <tr>
+                <td>{{ pres.diagnosis }}</td>
+                <td>{{ pres.medications }}</td>
+                <td>{{ pres.date_issued }}</td>
+                <td>{{ pres.doctor_name }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        {% else %}
+          <p>No prescriptions available yet.</p>
+        {% endif %}
+      </div>
+
+      <!-- All Doctors -->
+      <div id="content5" class="tab-content">
+        <h3 style="color: #2a5d8f;">All Doctors</h3>
+        <ul class="doctor-list">
+          <li><strong>Dr. A Kumar</strong> – Cardiologist</li>
+          <li><strong>Dr. B Sharma</strong> – General Physician</li>
+          <li><strong>Dr. R Mehta</strong> – Neurologist</li>
+          <li><strong>Dr. S Kapoor</strong> – Pediatrician</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

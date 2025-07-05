@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+  <style>
+   body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      color: #333;
+      background: url("{{ url_for('static', filename='AboutThemeSet.png') }}") no-repeat center center/cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      position: relative;
+    }
+    .login-container {
+      background: #fff;
+      padding: 2rem 3rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 350px;
+    }
+    h2 {
+      margin-bottom: 0.5rem;
+      color: #2a5d8f;
+    }
+    form label {
+      display: block;
+      margin-top: 1rem;
+      color: #333;
+    }
+    input {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.3rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      margin-top: 1.5rem;
+      width: 100%;
+      padding: 0.6rem;
+      background-color: #2a5d8f;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #1d446e;
+    }
+    .back-link {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      text-decoration: none;
+      color: #2a5d8f;
+      font-weight: bold;
+      font-size: 0.95rem;
+    }
+    .back-link:hover {
+      color: #1d446e;
+    }
+    .extra-links {
+      text-align: center;
+      margin-top: 1.2rem;
+      font-size: 0.9rem;
+    }
+    .extra-links a {
+      color: #2a5d8f;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .extra-links a:hover {
+      color: #1d446e;
+    }
+  </style>
+</head>
+<body>
+  <a href="{{ url_for('first') }}" class="back-link">Back</a>
+  <div class="login-container">
+    <h2>Login</h2>
+    <form action="{{ url_for('login') }}" method="POST">
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required />
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required />
+      <button type="submit">Login</button>
+    </form>
+    <div class="extra-links">
+      <p>Don’t have an account? <a href="{{ url_for('signup') }}">Sign up</a></p>
+    </div>
+  </div>
+</body>
+</html>

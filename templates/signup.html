@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Signup</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      color: #333;
+      background: url("{{ url_for('static', filename='AboutThemeSet.png') }}") no-repeat center center/cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .signup-container {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 2rem 2.5rem;
+      border-radius: 15px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+      width: 420px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #245a8d;
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      font-weight: 600;
+      margin-top: 1rem;
+      display: block;
+      color: #333;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 0.6rem;
+      margin-top: 0.4rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .role-selection {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 0.5rem;
+    }
+
+    .terms {
+      margin-top: 1rem;
+      font-size: 14px;
+    }
+
+    .terms label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      font-weight: normal;
+    }
+
+    .terms input[type="checkbox"] {
+      transform: scale(1.1);
+      accent-color: #245a8d;
+      cursor: pointer;
+    }
+
+    .terms a {
+      color: #245a8d;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .terms a:hover {
+      text-decoration: underline;
+    }
+
+    .patient-fields, .doctor-fields {
+      display: none;
+    }
+
+    button {
+      margin-top: 2rem;
+      width: 100%;
+      padding: 0.7rem;
+      background-color: #245a8d;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background-color: #1d456d;
+    }
+
+    .back-link {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      text-decoration: none;
+      color: #245a8d;
+      font-weight: bold;
+    }
+
+    .back-link:hover {
+      color: #123c66;
+    }
+
+    .login-link {
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    .login-link a {
+      color: #245a8d;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .login-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+<a href="{{ url_for('first') }}" class="back-link">Back</a>
+<div class="signup-container">
+  <h2>Sign Up</h2>
+  <form action="{{ url_for('signup') }}" method="POST">
+    <label for="name">Full Name</label>
+    <input type="text" name="name" required>
+    <label for="email">Email</label>
+    <input type="email" name="email" required>
+    <label for="password">Password</label>
+    <input type="password" name="password" required>
+    <label for="confirm">Confirm Password</label>
+    <input type="password" name="confirm" required>
+    <label>I am a:</label>
+    <div class="role-selection">
+      <label><input type="radio" name="role" value="patient" required> Patient</label>
+      <label><input type="radio" name="role" value="doctor"> Doctor</label>
+    </div>
+
+    <div class="patient-fields" id="patientFields">
+      <label for="age">Age</label>
+      <input type="number" name="age">
+      <label for="gender">Gender</label>
+      <select name="gender">
+        <option value="">Select</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+
+    <div class="doctor-fields" id="doctorFields">
+      <label for="specialty">Specialization</label>
+      <input type="text" name="specialty">
+      <label for="location">Location</label>
+      <input type="text" name="location">
+      <label for="license">Medical License Number</label>
+      <input type="text" name="license">
+    </div>
+
+    <div class="terms">
+      <label>
+        <input type="checkbox" name="terms" required>
+        I agree to the <a href="#">Terms & Conditions</a>
+      </label>
+    </div>
+
+    <button type="submit">Sign Up</button>
+  </form>
+
+  <div class="login-link">
+    Already have an account? <a href="{{ url_for('login') }}">Login</a>
+  </div>
+</div>
+
+<script>
+  const roleRadios = document.querySelectorAll('input[name="role"]');
+  const doctorFields = document.getElementById('doctorFields');
+  const patientFields = document.getElementById('patientFields');
+
+  roleRadios.forEach(radio => {
+    radio.addEventListener('change', () => {
+      if (radio.value === 'doctor') {
+        doctorFields.style.display = 'block';
+        patientFields.style.display = 'none';
+      } else {
+        doctorFields.style.display = 'none';
+        patientFields.style.display = 'block';
+      }
+    });
+  });
+</script>
+</body>
+</html>

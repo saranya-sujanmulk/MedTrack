@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About MedTrack</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      min-height: 100vh;
+      background: url("{{ url_for('static', filename='AboutThemeSet.png') }}") no-repeat center center/cover;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 3rem 1rem;
+      color: #333;
+    }
+
+    .about-box {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 2.5rem;
+      border-radius: 12px;
+      max-width: 900px;
+      width: 100%;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+      font-size: 2rem;
+      color: #1a6fa4;
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      font-size: 1.4rem;
+      margin-top: 2rem;
+      color: #2a5d8f;
+    }
+
+    p {
+      margin-top: 0.8rem;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #444;
+    }
+
+    .back-link {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      text-decoration: none;
+      background-color: #1a6fa4;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 0.95rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .back-link:hover {
+      background-color: #144e7a;
+    }
+
+    footer {
+      margin-top: 2rem;
+      text-align: center;
+      color: #777;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 600px) {
+      .about-box {
+        padding: 1.5rem;
+      }
+
+      .back-link {
+        top: 15px;
+        right: 15px;
+        padding: 6px 12px;
+        font-size: 0.85rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="{{ url_for('first') }}" class="back-link">Back</a>
+
+  <div class="about-box">
+    <h1>About MedTrack</h1>
+    <p><strong>MedTrack</strong> is a smart healthcare companion designed to support patients and doctors when it matters most...</p>
+
+    <h2>Our Mission</h2>
+    <p>Our goal is simple: to make healthcare more accessible, responsive, and effective. MedTrack empowers patients to log vital health information and reach out to their healthcare providers quickly. For doctors, it offers a streamlined platform to track symptoms, receive alerts, and stay connected with their patients no matter where they are.</p>
+
+    <h2>Why MedTrack?</h2>
+    <p>Whether you're managing chronic conditions, monitoring post-hospital recovery, or just looking for a smarter way to stay on top of health data, MedTrack is your reliable partner. With a clean design and intuitive interface, it keeps both functionality and user experience at the core.</p>
+
+    <h2>Designed for Real Needs</h2>
+    <p>MedTrack isn't just another digital tool—it's built with empathy. From rural patients with limited access to medical care to urban professionals juggling health and lifestyle, we tailor technology to meet real-world needs. Each feature, from login security to role-based access, serves a specific purpose that makes care smarter, not harder.</p>
+
+    <h2>The MedTrack Vision</h2>
+    <p>We imagine a future where digital healthcare is seamless, immediate, and just as trustworthy as walking into a clinic. MedTrack is a step in that direction—blending professional design with meaningful features like doctor-patient messaging, remote monitoring, and fast notifications powered by cloud infrastructure.</p>
+
+    <h2>Built by Passion</h2>
+    <p>MedTrack is fueled by a deep passion for using technology to solve real problems. Every line of code, every design detail, reflects a commitment to better care. We're not just building software—we're building trust between people and the healthcare they deserve.</p>
+
+    <footer>
+      &copy; 2025 MedTrack. All rights reserved.
+    </footer>
+  </div>
+</body>
+</html>
